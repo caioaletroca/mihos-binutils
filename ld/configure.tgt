@@ -43,6 +43,15 @@ targ64_extra_libpath=
 # Please try to keep this table more or less in alphabetic order - it
 # makes it much easier to lookup a specific archictecture.
 case "${targ}" in
+i[3-7]86-*-mihos*)
+			targ_emul=elf_i386_mihos
+			targ_extra_emuls=elf_i386
+			targ64_extra_emuls="elf_x86_64_mihos elf_x86_64"
+			;;
+x86_64-*-mihos*)
+			targ_emul=elf_x86_64_mihos
+			targ_extra_emuls="elf_i386_mihos elf_x86_64 elf_i386"
+			;;
 aarch64_be-*-elf)	targ_emul=aarch64elfb
 			targ_extra_emuls="aarch64elf aarch64elf32 aarch64elf32b armelfb armelf"
 			;;

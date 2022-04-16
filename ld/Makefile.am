@@ -277,6 +277,7 @@ ALL_EMULATION_SOURCES = \
 	eelf32xtensa.c \
 	eelf32z80.c \
 	eelf_i386.c \
+	eelf_i386_mihos.c \
 	eelf_i386_be.c \
 	eelf_i386_fbsd.c \
 	eelf_i386_ldso.c \
@@ -401,6 +402,7 @@ ALL_64_EMULATION_SOURCES = \
 	eelf32elmip.c \
 	eelf32elmipvxworks.c \
 	eelf32l4300.c \
+	eelf_x86_64_mihos.c \
 	eelf32lmip.c \
 	eelf32lr5900.c \
 	eelf32lr5900n32.c \
@@ -1105,3 +1107,13 @@ distclean-local:
 	rm -rf ldscripts
 
 MAINTAINERCLEANFILES += ld.info
+
+# Add this after eelf_i386.c:
+eelf_i386_mihos.c: $(srcdir)/emulparams/elf_i386_mihos.sh \
+  $(ELF_DEPS) $(srcdir)/scripttempl/elf.sc ${GEN_DEPENDS}
+       ${GENSCRIPTS} elf_i386_mihos "$(tdir_elf_i386_mihos)"
+ 
+# Add this after eelf_x86_64.c:
+eelf_x86_64_mihos.c: $(srcdir)/emulparams/elf_x86_64_mihos.sh \
+  $(ELF_DEPS) $(srcdir)/scripttempl/elf.sc ${GEN_DEPENDS}
+       ${GENSCRIPTS} elf_x86_64_mihos "$(tdir_elf_x86_64_mihos)"
