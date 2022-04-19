@@ -522,6 +522,7 @@ pdfdir = @pdfdir@
 prefix = @prefix@
 program_transform_name = @program_transform_name@
 psdir = @psdir@
+runstatedir = @runstatedir@
 sbindir = @sbindir@
 sharedstatedir = @sharedstatedir@
 srcdir = @srcdir@
@@ -767,6 +768,7 @@ ALL_EMULATION_SOURCES = \
 	eelf32xtensa.c \
 	eelf32z80.c \
 	eelf_i386.c \
+	eelf_i386_mihos.c \
 	eelf_i386_be.c \
 	eelf_i386_fbsd.c \
 	eelf_i386_ldso.c \
@@ -890,6 +892,7 @@ ALL_64_EMULATION_SOURCES = \
 	eelf32elmip.c \
 	eelf32elmipvxworks.c \
 	eelf32l4300.c \
+	eelf_x86_64_mihos.c \
 	eelf32lmip.c \
 	eelf32lr5900.c \
 	eelf32lr5900n32.c \
@@ -1434,6 +1437,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/eelf_i386_be.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/eelf_i386_fbsd.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/eelf_i386_ldso.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/eelf_i386_mihos.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/eelf_i386_sol2.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/eelf_i386_vxworks.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/eelf_iamcu.Po@am__quote@
@@ -1445,6 +1449,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/eelf_x86_64.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/eelf_x86_64_cloudabi.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/eelf_x86_64_fbsd.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/eelf_x86_64_mihos.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/eelf_x86_64_sol2.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/eh8300elf.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/eh8300elf_linux.Po@am__quote@
@@ -2695,6 +2700,16 @@ doc/ld/index.html: ld.texi $(ld_TEXINFOS)
 	  --split=node -I$(srcdir) $(srcdir)/ld.texi -o doc/ld
 distclean-local:
 	rm -rf ldscripts
+
+# Add this after eelf_i386.c:
+eelf_i386_mihos.c: $(srcdir)/emulparams/elf_i386_mihos.sh \
+  $(ELF_DEPS) $(srcdir)/scripttempl/elf.sc ${GEN_DEPENDS}
+       ${GENSCRIPTS} elf_i386_mihos "$(tdir_elf_i386_mihos)"
+
+# Add this after eelf_x86_64.c:
+eelf_x86_64_mihos.c: $(srcdir)/emulparams/elf_x86_64_mihos.sh \
+  $(ELF_DEPS) $(srcdir)/scripttempl/elf.sc ${GEN_DEPENDS}
+       ${GENSCRIPTS} elf_x86_64_mihos "$(tdir_elf_x86_64_mihos)"
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.

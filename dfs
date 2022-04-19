@@ -1,0 +1,61 @@
+[1mdiff --git a/ld/Makefile.in b/ld/Makefile.in[m
+[1mindex ef2e99e0..9cd385a3 100644[m
+[1m--- a/ld/Makefile.in[m
+[1m+++ b/ld/Makefile.in[m
+[36m@@ -522,6 +522,7 @@[m [mpdfdir = @pdfdir@[m
+ prefix = @prefix@[m
+ program_transform_name = @program_transform_name@[m
+ psdir = @psdir@[m
+[32m+[m[32mrunstatedir = @runstatedir@[m
+ sbindir = @sbindir@[m
+ sharedstatedir = @sharedstatedir@[m
+ srcdir = @srcdir@[m
+[36m@@ -767,6 +768,7 @@[m [mALL_EMULATION_SOURCES = \[m
+ 	eelf32xtensa.c \[m
+ 	eelf32z80.c \[m
+ 	eelf_i386.c \[m
+[32m+[m	[32meelf_i386_mihos.c \[m
+ 	eelf_i386_be.c \[m
+ 	eelf_i386_fbsd.c \[m
+ 	eelf_i386_ldso.c \[m
+[36m@@ -890,6 +892,7 @@[m [mALL_64_EMULATION_SOURCES = \[m
+ 	eelf32elmip.c \[m
+ 	eelf32elmipvxworks.c \[m
+ 	eelf32l4300.c \[m
+[32m+[m	[32meelf_x86_64_mihos.c \[m
+ 	eelf32lmip.c \[m
+ 	eelf32lr5900.c \[m
+ 	eelf32lr5900n32.c \[m
+[36m@@ -1434,6 +1437,7 @@[m [mdistclean-compile:[m
+ @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/eelf_i386_be.Po@am__quote@[m
+ @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/eelf_i386_fbsd.Po@am__quote@[m
+ @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/eelf_i386_ldso.Po@am__quote@[m
+[32m+[m[32m@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/eelf_i386_mihos.Po@am__quote@[m
+ @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/eelf_i386_sol2.Po@am__quote@[m
+ @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/eelf_i386_vxworks.Po@am__quote@[m
+ @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/eelf_iamcu.Po@am__quote@[m
+[36m@@ -1445,6 +1449,7 @@[m [mdistclean-compile:[m
+ @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/eelf_x86_64.Po@am__quote@[m
+ @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/eelf_x86_64_cloudabi.Po@am__quote@[m
+ @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/eelf_x86_64_fbsd.Po@am__quote@[m
+[32m+[m[32m@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/eelf_x86_64_mihos.Po@am__quote@[m
+ @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/eelf_x86_64_sol2.Po@am__quote@[m
+ @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/eh8300elf.Po@am__quote@[m
+ @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/eh8300elf_linux.Po@am__quote@[m
+[36m@@ -2696,6 +2701,16 @@[m [mdoc/ld/index.html: ld.texi $(ld_TEXINFOS)[m
+ distclean-local:[m
+ 	rm -rf ldscripts[m
+ [m
+[32m+[m[32m# Add this after eelf_i386.c:[m
+[32m+[m[32meelf_i386_mihos.c: $(srcdir)/emulparams/elf_i386_mihos.sh \[m
+[32m+[m[32m  $(ELF_DEPS) $(srcdir)/scripttempl/elf.sc ${GEN_DEPENDS}[m
+[32m+[m[32m       ${GENSCRIPTS} elf_i386_mihos "$(tdir_elf_i386_mihos)"[m
+[32m+[m
+[32m+[m[32m# Add this after eelf_x86_64.c:[m
+[32m+[m[32meelf_x86_64_mihos.c: $(srcdir)/emulparams/elf_x86_64_mihos.sh \[m
+[32m+[m[32m  $(ELF_DEPS) $(srcdir)/scripttempl/elf.sc ${GEN_DEPENDS}[m
+[32m+[m[32m       ${GENSCRIPTS} elf_x86_64_mihos "$(tdir_elf_x86_64_mihos)"[m
+[32m+[m
+ # Tell versions [3.59,3.63) of GNU make to not export all variables.[m
+ # Otherwise a system limit (for SysV at least) may be exceeded.[m
+ .NOEXPORT:[m
