@@ -2702,14 +2702,12 @@ distclean-local:
 	rm -rf ldscripts
 
 # Add this after eelf_i386.c:
-eelf_i386_mihos.c: $(srcdir)/emulparams/elf_i386_mihos.sh \
-  $(ELF_DEPS) $(srcdir)/scripttempl/elf.sc ${GEN_DEPENDS}
-       ${GENSCRIPTS} elf_i386_mihos "$(tdir_elf_i386_mihos)"
+eelf_i386_mihos.c: $(srcdir)/emulparams/elf_i386_mihos.sh $(ELF_DEPS) $(srcdir)/scripttempl/elf.sc ${GEN_DEPENDS}
+	${GENSCRIPTS} elf_i386_mihos "$(tdir_elf_i386_mihos)"
 
 # Add this after eelf_x86_64.c:
-eelf_x86_64_mihos.c: $(srcdir)/emulparams/elf_x86_64_mihos.sh \
-  $(ELF_DEPS) $(srcdir)/scripttempl/elf.sc ${GEN_DEPENDS}
-       ${GENSCRIPTS} elf_x86_64_mihos "$(tdir_elf_x86_64_mihos)"
+eelf_x86_64_mihos.c: $(srcdir)/emulparams/elf_x86_64_mihos.sh $(ELF_DEPS) $(srcdir)/scripttempl/elf.sc ${GEN_DEPENDS}
+	${GENSCRIPTS} elf_x86_64_mihos "$(tdir_elf_x86_64_mihos)"
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.
